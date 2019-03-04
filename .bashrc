@@ -123,3 +123,12 @@ export HISTSIZE=100000                  # 現在のセッションで利用し�
 export HISTFILESIZE=100000              # 「.bash_history」で記録する履歴数を定義する
 shopt -s histappend                     # 「.bash_history」への記録方式を追記にする
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# set PATH so it includes nodenv's private bin if it exists
+
+# set PATH so it includes nodeenv's bin if it exists
+if [ -d "$HOME/.nodenv/bin" ] ; then
+    PATH="$HOME/.nodenv/bin:$PATH"
+    eval "$(nodenv init -)"
+fi
+
