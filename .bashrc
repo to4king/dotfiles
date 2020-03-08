@@ -132,6 +132,16 @@ if [ -d "$HOME/.nodenv/bin" ] ; then
     eval "$(nodenv init -)"
 fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 # display branch name in git project.
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
@@ -152,3 +162,7 @@ function promps {
     PS1="${TITLEBAR}${GREEN}${BASE}${WHITE}:${BLUE}\W${GREEN}\$(parse_git_branch)${BLUE}\$${WHITE} "
 }
 promps
+
+
+export EDITOR=code
+eval "$(direnv hook bash)"
