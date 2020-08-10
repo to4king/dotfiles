@@ -166,3 +166,8 @@ promps
 
 export EDITOR=code
 eval "$(direnv hook bash)"
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.poetry/bin"] ; then
+	PATH="$HOME/.poetry/bin:$PATH"
+fi
